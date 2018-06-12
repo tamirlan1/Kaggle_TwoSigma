@@ -1,0 +1,197 @@
+GB
+1
+n_estimator: 500; learning_rate: 0.1; max_features: sqrt; max_depth: 1
+CV loss: 0.652545934387
+Val loss: 0.655859956912
+2
+n_estimator: 500; learning_rate: 0.1; max_features: 0.2; max_depth: 1
+CV loss: 0.644981959957
+Val loss: 0.647835904726
+3
+n_estimator: 500; learning_rate: 0.1; max_features: 0.3; max_depth: 1
+CV loss: 0.639547807107
+Val loss: 0.642353900915
+4
+n_estimator: 500; learning_rate: 0.1; max_features: 0.4; max_depth: 1
+CV loss: 0.638524275075
+Val loss: 0.641275345451
+5
+n_estimator: 500; learning_rate: 0.1; max_features: 0.5; max_depth: 1
+CV loss: 0.638435574525
+Val loss: 0.641243520746
+6
+n_estimator: 500; learning_rate: 0.1; max_features: 0.8; max_depth: 1
+CV loss: 0.637866260834
+Val loss: 0.640545069826
+7
+n_estimator: 500; learning_rate: 0.1; max_features: sqrt; max_depth: 3
+CV loss: 0.604508085266
+Val loss: 0.604836420134
+8
+n_estimator: 500; learning_rate: 0.1; max_features: 0.2; max_depth: 3
+CV loss: 0.597949165269
+Val loss: 0.599911455855
+9
+n_estimator: 500; learning_rate: 0.1; max_features: 0.3; max_depth: 3
+CV loss: 0.594131444122
+Val loss: 0.595476231859
+10
+n_estimator: 500; learning_rate: 0.1; max_features: 0.4; max_depth: 3
+CV loss: 0.593687415601
+Val loss: 0.594313481895
+11
+n_estimator: 500; learning_rate: 0.1; max_features: 0.5; max_depth: 3
+CV loss: 0.593041811602
+Val loss: 0.594735011611
+12
+n_estimator: 500; learning_rate: 0.1; max_features: 0.8; max_depth: 3
+CV loss: 0.593298175363
+Val loss: 0.593342161203
+13
+n_estimator: 500; learning_rate: 0.1; max_features: sqrt; max_depth: 5
+CV loss: 0.594485882634
+Val loss: 0.593729297367
+14
+n_estimator: 500; learning_rate: 0.1; max_features: 0.2; max_depth: 5
+CV loss: 0.591599081824
+Val loss: 0.595009497827
+15
+n_estimator: 500; learning_rate: 0.1; max_features: 0.3; max_depth: 5
+CV loss: 0.59134735322
+Val loss: 0.592817031069
+16
+n_estimator: 500; learning_rate: 0.1; max_features: 0.4; max_depth: 5
+CV loss: 0.592526238331
+Val loss: 0.593965465147
+17
+n_estimator: 500; learning_rate: 0.1; max_features: 0.5; max_depth: 5
+CV loss: 0.592937487343
+Val loss: 0.596705798479
+18
+n_estimator: 500; learning_rate: 0.1; max_features: 0.8; max_depth: 5
+CV loss: 0.59538957536
+Val loss: 0.598440219355
+19
+n_estimator: 500; learning_rate: 0.1; max_features: sqrt; max_depth: 7
+CV loss: 0.614991736393
+Val loss: 0.611909979827
+20
+n_estimator: 500; learning_rate: 0.1; max_features: 0.2; max_depth: 7
+CV loss: 0.620078196185
+Val loss: 0.618983462796
+21
+n_estimator: 500; learning_rate: 0.1; max_features: 0.3; max_depth: 7
+CV loss: 0.62689604282
+Val loss: 0.627265052729
+22
+n_estimator: 500; learning_rate: 0.1; max_features: 0.4; max_depth: 7
+CV loss: 0.631791854347
+Val loss: 0.631119379681
+23
+n_estimator: 500; learning_rate: 0.1; max_features: 0.5; max_depth: 7
+CV loss: 0.632690401683
+Val loss: 0.636429051964
+24
+n_estimator: 500; learning_rate: 0.1; max_features: 0.8; max_depth: 7
+CV loss: 0.638384171434
+Val loss: 0.642649758118
+25
+n_estimator: 500; learning_rate: 0.1; max_features: sqrt; max_depth: 10
+CV loss: 0.808945139416
+Val loss: 0.80089384613
+26
+n_estimator: 500; learning_rate: 0.1; max_features: 0.2; max_depth: 10
+CV loss: 0.856178847256
+Val loss: 0.853427395895
+27
+n_estimator: 500; learning_rate: 0.1; max_features: 0.3; max_depth: 10
+CV loss: 0.892690271782
+Val loss: 0.894311474241
+28
+n_estimator: 500; learning_rate: 0.1; max_features: 0.4; max_depth: 10
+CV loss: 0.910757136533
+Val loss: 0.91434988797
+29
+n_estimator: 500; learning_rate: 0.1; max_features: 0.5; max_depth: 10
+CV loss: 0.918237880477
+Val loss: 0.917106363375
+30
+n_estimator: 500; learning_rate: 0.1; max_features: 0.8; max_depth: 10
+CV loss: 0.928353573124
+Val loss: 0.933054251265
+31
+n_estimator: 500; learning_rate: 0.1; max_features: sqrt; max_depth: 12
+CV loss: 1.16962341919
+Val loss: 1.14894360848
+32
+n_estimator: 500; learning_rate: 0.1; max_features: 0.2; max_depth: 12
+CV loss: 1.29677474728
+Val loss: 1.29234013175
+33
+n_estimator: 500; learning_rate: 0.1; max_features: 0.3; max_depth: 12
+CV loss: 1.36942839874
+Val loss: 1.36218220496
+34
+n_estimator: 500; learning_rate: 0.1; max_features: 0.4; max_depth: 12
+CV loss: 1.40133728611
+Val loss: 1.39622585694
+35
+n_estimator: 500; learning_rate: 0.2; max_features: sqrt; max_depth: 1
+CV loss: 0.635684181982
+Val loss: 0.637925186325
+36
+n_estimator: 500; learning_rate: 0.2; max_features: 0.2; max_depth: 1
+CV loss: 0.629406145937
+Val loss: 0.631464139831
+37
+n_estimator: 500; learning_rate: 0.2; max_features: 0.4; max_depth: 1
+CV loss: 0.627787201873
+Val loss: 0.626701895409
+38
+n_estimator: 500; learning_rate: 0.2; max_features: 0.8; max_depth: 1
+CV loss: 0.62797405457
+Val loss: 0.626550240267
+39
+n_estimator: 500; learning_rate: 0.2; max_features: sqrt; max_depth: 3
+CV loss: 0.594963418771
+Val loss: 0.596652829312
+40
+n_estimator: 500; learning_rate: 0.2; max_features: 0.2; max_depth: 3
+CV loss: 0.592279117508
+Val loss: 0.592126641965
+41
+n_estimator: 500; learning_rate: 0.2; max_features: 0.4; max_depth: 3
+CV loss: 0.589994347428
+Val loss: 0.591012222469
+42
+n_estimator: 500; learning_rate: 0.2; max_features: 0.8; max_depth: 3
+CV loss: 0.592253955621
+Val loss: 0.592827117297
+43
+n_estimator: 500; learning_rate: 0.2; max_features: sqrt; max_depth: 5
+CV loss: 0.607522398236
+Val loss: 0.606194936954
+44
+n_estimator: 500; learning_rate: 0.2; max_features: 0.2; max_depth: 5
+CV loss: 0.609984216099
+Val loss: 0.614204369863
+45
+n_estimator: 500; learning_rate: 0.2; max_features: 0.4; max_depth: 5
+CV loss: 0.618738853566
+Val loss: 0.620554322249
+46
+n_estimator: 500; learning_rate: 0.2; max_features: 0.8; max_depth: 5
+CV loss: 0.62904633569
+Val loss: 0.628535728092
+47
+n_estimator: 500; learning_rate: 0.2; max_features: sqrt; max_depth: 7
+CV loss: 0.686840514105
+Val loss: 0.679581756439
+48
+n_estimator: 500; learning_rate: 0.2; max_features: 0.2; max_depth: 7
+CV loss: 0.705496247599
+Val loss: 0.701347322361
+49
+n_estimator: 500; learning_rate: 0.2; max_features: 0.4; max_depth: 7
+CV loss: 0.732220412884
+Val loss: 0.7375550389

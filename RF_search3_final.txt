@@ -1,0 +1,727 @@
+CellToolbar
+Random Forest + 'features'
+Train set
+In [1]:
+
+import pandas as pd
+import numpy as np
+from sklearn.metrics import log_loss
+from sklearn.ensemble import RandomForestClassifier
+import cPickle
+import warnings
+warnings.filterwarnings("ignore")
+from sklearn.grid_search import GridSearchCV
+from sklearn.grid_search import RandomizedSearchCV
+from sklearn.cross_validation import train_test_split
+from sklearn.feature_selection import chi2
+from sklearn.cross_validation import KFold
+​
+pd.options.display.max_columns = 160
+In [2]:
+
+_desc
+# all_df_original = pd.read_json('train.json')
+all_df = pd.read_csv('train_feats_max_desc.csv')
+In [3]:
+
+all_df.shape
+Out[3]:
+(49352, 83)
+In [4]:
+
+# all_df.head(2)
+In [5]:
+
+x_train, x_val, y_train, y_val = train_test_split(all_df.drop(['interest_level'], 1),all_df[['interest_level']], test_size=0.2, random_state=42)
+​
+In [6]:
+
+cat_feats = cPickle.load(open('cat_feats.p', 'rb'))
+​
+for col in ['interest_level']:
+    y_train[col] = y_train[col].astype('category')
+    y_val[col] = y_val[col].astype('category')
+    
+for col in cat_feats:
+    x_train[col] = x_train[col].astype('category')
+    x_val[col] = x_val[col].astype('category')
+In [7]:
+
+drop_list = [u'listing_id', 'index']
+x_train_small = x_train.drop(drop_list,1)
+​
+x_val_small = x_val.drop(drop_list,1)
+In [8]:
+
+x_train_small_nolon = x_train_small.drop(['longitude'], axis=1)
+# scores, pvalues = chi2(x_train_small_nolon, y_train)
+# x_train_small_nolon = x_train_small.drop(['longitude'], axis=1)
+# scores, pvalues = chi2(x_train_small_nolon, y_train)
+In [9]:
+
+# low_pvalues_cols = x_train_small_nolon.columns[(pvalues < 0.05)]
+In [10]:
+
+# low_pvalues_cols
+In [11]:
+
+# low_pvalues_cols = cPickle.load(open('low_pvalues_cols.p', 'rb'))
+x_train_best = x_train_small#[low_pvalues_cols]
+x_val_best = x_val_small#[low_pvalues_cols]
+x_train_best.shape
+# x_train_best.head(2)
+Out[11]:
+(39481, 80)
+In [9]:
+
+# C_range = np.logspace(-2, 10, 13)
+# gamma_range = np.logspace(-9, 3, 13)
+# param_grid = dict(gamma=gamma_range, C=C_range)
+# cv = StratifiedShuffleSplit(n_splits=5, test_size=0.2, random_state=42)
+# grid = GridSearchCV(SVC(), param_grid=param_grid, cv=cv)
+# grid.fit(x_train_best[:10], y_train[:10])
+​
+# print("The best parameters are %s with a score of %0.2f"
+#       % (grid.best_params_, grid.best_score_))
+​
+# # Now we need to fit a classifier for all parameters in the 2d version
+# # (we use a smaller set of parameters here because it takes a while to train)
+​
+# C_2d_range = [1e-2, 1, 1e2]
+# gamma_2d_range = [1e-1, 1, 1e1]
+# classifiers = []
+# for C in C_2d_range:
+#     for gamma in gamma_2d_range:
+#         clf = SVC(C=C, gamma=gamma)
+#         clf.fit(X_2d, y_2d)
+#         classifiers.append((C, gamma, clf))
+In [27]:
+
+# model = RandomForestClassifier()#n_estimators=10, random_state=0)
+# parameters = {'max_features':[0.3, 0.5], 'max_depth':[10, 20], 'min_samples_split':[5, 10]}
+# clf = GridSearchCV(model, parameters, scoring='log_loss', cv=2)
+# # alphas = np.array([0.3,0.5])
+# # grid = GridSearchCV(estimator=model, param_grid=dict(max_features=alphas))
+​
+In [28]:
+
+# grid.fit(x_train_best, y_train)
+In [12]:
+
+x_train_best
+model = RandomForestClassifier(n_estimators=1000, max_features=0.3, max_depth=18, min_samples_split=20, random_state=0, n_jobs=-1)
+model = model.fit(x_train_best, y_train)
+In [18]:
+
+predicted_train = pd.DataFrame(model.predict_proba(x_train_best))
+# predicted = model.predict_proba(x)
+predicted_train.columns = ['high', 'low', 'medium']
+predicted_train.head()
+# predicted
+Out[18]:
+high	low	medium
+0	0.022773	0.867357	0.109871
+1	0.004327	0.956103	0.039570
+2	0.078629	0.535034	0.386337
+3	0.108038	0.683020	0.208942
+4	0.024283	0.868272	0.107444
+In [19]:
+
+log_loss_train = log_loss(y_train, predicted_train.as_matrix())
+log_loss_train
+Out[19]:
+0.4522253189524138
+In [20]:
+
+predicted_val = pd.DataFrame(model.predict_proba(x_val_best))
+# predicted = model.predict_proba(x)
+predicted_val.columns = ['high', 'low', 'medium']
+predicted_val.head()
+# predicted
+Out[20]:
+high	low	medium
+0	0.053813	0.714159	0.232027
+1	0.080533	0.589353	0.330114
+2	0.018792	0.836816	0.144393
+3	0.042385	0.738939	0.218676
+4	0.051194	0.761209	0.187597
+In [21]:
+
+log_loss_val = log_loss(y_val, predicted_val.as_matrix())
+log_loss_val
+# 0.68867588674963398, 0.68 ok (n_estimators=20, max_features=0.5, max_depth=5, min_samples_split=2, random_state=0)
+# 0.65246470021282676, 0.60 ok (n_estimators=20, max_features=0.5, max_depth=5, min_samples_split=2, random_state=0)
+# 0.65992553205901083, 0.47953531208509781 OF (n_estimators=100, max_features='sqrt', max_depth=20, min_samples_split=2, random_state=0) 
+# 0.64955018062340741, 0.5490683949104378 OF (n_estimators=100, max_features='sqrt', max_depth=20, min_samples_split=10, random_state=0)
+​
+# new
+# best_loss: 0.627188125099
+# max_features: 0.3; max_depth: 20; min_samples_split: 20
+​
+Out[21]:
+0.61146361117286563
+In [23]:
+
+imp = zip(x_train_best.columns, list(model.feature_importances_))
+imp.sort(key = lambda t: t[1], reverse=True)
+In [27]:
+
+bad_feats = [i[0] for i in imp[-20:]]
+In [28]:
+
+x_train_best.drop(bad_feats, axis=1, inplace=True)
+x_val_best
+x_train_best.drop(bad_feats, axis=1, inplace=True)
+x_val_best.drop(bad_feats, axis=1, inplace=True)
+In [29]:
+
+.shape
+x_train_best.shape, x_val_best.shape
+Out[29]:
+((39481, 60), (9871, 60))
+Cross Validation
+In [30]:
+
+def get_cv_loss(mf, md, mss):
+    kf = KFold(x_train_best.shape[0], n_folds=5, random_state=2017)
+    loss_tr = []
+    loss_ts = []
+    for train_index, test_index in kf:
+        x_tr = x_train_best.reset_index().loc[train_index].set_index(['index'])
+        y_tr =  y_train.reset_index().loc[train_index].set_index(['index'])
+        x_ts = x_train_best.reset_index().loc[test_index].set_index(['index'])
+        y_ts = y_train.reset_index().loc[test_index].set_index(['index'])
+​
+        model = RandomForestClassifier(n_estimators=1000, max_features=mf, max_depth=md, min_samples_split=mss, random_state=23, n_jobs=-1)
+        model = model.fit(x_tr, y_tr)
+​
+        predicted_ts = pd.DataFrame(model.predict_proba(x_ts))
+        predicted_ts.columns = ['high', 'low', 'medium']
+        log_loss_ts = log_loss(y_ts, predicted_ts.as_matrix())
+        loss_ts.append(log_loss_ts)
+    
+    print 'CV loss:', np.mean(loss_ts)
+    predicted_val = pd.DataFrame(model.predict_proba(x_val_best))
+    predicted_val.columns = ['high', 'low', 'medium']
+    log_loss_val = log_loss(y_val, predicted_val.as_matrix())
+    print 'Val loss:', log_loss_val
+    return np.mean(loss_ts)
+In [*]:
+
+max_features = ['sqrt',0.2, 0.3, 0.4, 0.5]
+max_depth = [10, 12, 14, 16, 18, 20]
+min_samples_split = [2, 5, 10, 20]
+best_loss = 100
+best_params = ''
+count = 1
+for mf in max_features:
+    for md in max_depth:
+        for mss in min_samples_split:
+            print count
+            count += 1
+            params = 'max_features: ' + str(mf) + '; max_depth: ' + str(md) + '; min_samples_split: ' + str(mss)
+            print params
+#             model = RandomForestClassifier(n_estimators=500, max_features=mf, max_depth=md, min_samples_split=mss, random_state=0)
+#             model = model.fit(x_train_best, y_train)
+#             predicted_train = pd.DataFrame(model.predict_proba(x_train_best))
+#             predicted_train.columns = ['high', 'low', 'medium']
+#             log_loss_train = log_loss(y_train, predicted_train.as_matrix())
+#             print 'Train loss:', log_loss_train
+#             predicted_val = pd.DataFrame(model.predict_proba(x_val_best))
+#             predicted_val.columns = ['high', 'low', 'medium']
+#             log_loss_val = log_loss(y_val, predicted_val.as_matrix())
+#             print 'Val loss:', log_loss_val
+#             if log_loss_val < best_loss:
+#                 best_loss = log_loss_val
+#                 best_params = params
+            cv_loss = get_cv_loss(mf, md, mss)
+            if cv_loss < best_loss:
+                best_loss = cv_loss
+                best_params = params   
+                
+print 'best_loss:', best_loss
+print 'best_params:', best_params
+# best_loss: 0.638016960424
+# best_params: max_features: 0.3; max_depth: 18; min_samples_split: 20
+1
+max_features: sqrt; max_depth: 10; min_samples_split: 2
+CV loss: 0.675526482118
+Val loss: 0.679861170817
+2
+max_features: sqrt; max_depth: 10; min_samples_split: 5
+CV loss: 0.675982110451
+Val loss: 0.680452954509
+3
+max_features: sqrt; max_depth: 10; min_samples_split: 10
+CV loss: 0.676223407256
+Val loss: 0.680526382245
+4
+max_features: sqrt; max_depth: 10; min_samples_split: 20
+CV loss: 0.676820722389
+Val loss: 0.681186245666
+5
+max_features: sqrt; max_depth: 12; min_samples_split: 2
+CV loss: 0.661287983262
+Val loss: 0.664803367558
+6
+max_features: sqrt; max_depth: 12; min_samples_split: 5
+CV loss: 0.661998514157
+Val loss: 0.665637346547
+7
+max_features: sqrt; max_depth: 12; min_samples_split: 10
+CV loss: 0.662717426544
+Val loss: 0.666722087955
+8
+max_features: sqrt; max_depth: 12; min_samples_split: 20
+CV loss: 0.663835209855
+Val loss: 0.667931655177
+9
+max_features: sqrt; max_depth: 14; min_samples_split: 2
+CV loss: 0.649675638076
+Val loss: 0.65283027702
+10
+max_features: sqrt; max_depth: 14; min_samples_split: 5
+CV loss: 0.650685390411
+Val loss: 0.653867221613
+11
+max_features: sqrt; max_depth: 14; min_samples_split: 10
+CV loss: 0.651410369244
+Val loss: 0.655176998187
+12
+max_features: sqrt; max_depth: 14; min_samples_split: 20
+CV loss: 0.653390553624
+Val loss: 0.656773763829
+13
+max_features: sqrt; max_depth: 16; min_samples_split: 2
+CV loss: 0.640626029534
+Val loss: 0.643569807007
+14
+max_features: sqrt; max_depth: 16; min_samples_split: 5
+CV loss: 0.641541063542
+Val loss: 0.643981093531
+15
+max_features: sqrt; max_depth: 16; min_samples_split: 10
+CV loss: 0.643017599185
+Val loss: 0.645344624892
+16
+max_features: sqrt; max_depth: 16; min_samples_split: 20
+CV loss: 0.645377702542
+Val loss: 0.647936172167
+17
+max_features: sqrt; max_depth: 18; min_samples_split: 2
+CV loss: 0.634392050088
+Val loss: 0.636822046491
+18
+max_features: sqrt; max_depth: 18; min_samples_split: 5
+CV loss: 0.635095241731
+Val loss: 0.637599424591
+19
+max_features: sqrt; max_depth: 18; min_samples_split: 10
+CV loss: 0.636626984076
+Val loss: 0.638994390977
+20
+max_features: sqrt; max_depth: 18; min_samples_split: 20
+CV loss: 0.639357592883
+Val loss: 0.641585108423
+21
+max_features: sqrt; max_depth: 20; min_samples_split: 2
+CV loss: 0.630535174113
+Val loss: 0.632800116405
+22
+max_features: sqrt; max_depth: 20; min_samples_split: 5
+CV loss: 0.630879757321
+Val loss: 0.632175767234
+23
+max_features: sqrt; max_depth: 20; min_samples_split: 10
+CV loss: 0.632577449435
+Val loss: 0.634213590043
+24
+max_features: sqrt; max_depth: 20; min_samples_split: 20
+CV loss: 0.635606734753
+Val loss: 0.6377683872
+25
+max_features: 0.2; max_depth: 10; min_samples_split: 2
+CV loss: 0.655313020441
+Val loss: 0.658910126855
+26
+max_features: 0.2; max_depth: 10; min_samples_split: 5
+CV loss: 0.655588489936
+Val loss: 0.658647556408
+27
+max_features: 0.2; max_depth: 10; min_samples_split: 10
+CV loss: 0.655584955243
+Val loss: 0.658465792527
+28
+max_features: 0.2; max_depth: 10; min_samples_split: 20
+CV loss: 0.656378907139
+Val loss: 0.659637468841
+29
+max_features: 0.2; max_depth: 12; min_samples_split: 2
+CV loss: 0.641317186872
+Val loss: 0.644194149206
+30
+max_features: 0.2; max_depth: 12; min_samples_split: 5
+CV loss: 0.641353219299
+Val loss: 0.644492124981
+31
+max_features: 0.2; max_depth: 12; min_samples_split: 10
+CV loss: 0.642223356105
+Val loss: 0.64492290373
+32
+max_features: 0.2; max_depth: 12; min_samples_split: 20
+CV loss: 0.643217197574
+Val loss: 0.645879806102
+33
+max_features: 0.2; max_depth: 14; min_samples_split: 2
+CV loss: 0.630454328603
+Val loss: 0.632840409387
+34
+max_features: 0.2; max_depth: 14; min_samples_split: 5
+CV loss: 0.630918870421
+Val loss: 0.632906961631
+35
+max_features: 0.2; max_depth: 14; min_samples_split: 10
+CV loss: 0.631641045054
+Val loss: 0.633872052225
+36
+max_features: 0.2; max_depth: 14; min_samples_split: 20
+CV loss: 0.633359523351
+Val loss: 0.635913903583
+37
+max_features: 0.2; max_depth: 16; min_samples_split: 2
+CV loss: 0.623403341613
+Val loss: 0.625422384677
+38
+max_features: 0.2; max_depth: 16; min_samples_split: 5
+CV loss: 0.623605526943
+Val loss: 0.62562749013
+39
+max_features: 0.2; max_depth: 16; min_samples_split: 10
+CV loss: 0.624636364058
+Val loss: 0.626442029243
+40
+max_features: 0.2; max_depth: 16; min_samples_split: 20
+CV loss: 0.626577845193
+Val loss: 0.628782828366
+41
+max_features: 0.2; max_depth: 18; min_samples_split: 2
+CV loss: 0.619466703969
+Val loss: 0.621450097873
+42
+max_features: 0.2; max_depth: 18; min_samples_split: 5
+CV loss: 0.619190574141
+Val loss: 0.621455323026
+43
+max_features: 0.2; max_depth: 18; min_samples_split: 10
+CV loss: 0.62007005633
+Val loss: 0.622060022266
+44
+max_features: 0.2; max_depth: 18; min_samples_split: 20
+CV loss: 0.622211786889
+Val loss: 0.624522770175
+45
+max_features: 0.2; max_depth: 20; min_samples_split: 2
+CV loss: 0.618635490414
+Val loss: 0.619875933341
+46
+max_features: 0.2; max_depth: 20; min_samples_split: 5
+CV loss: 0.617004527861
+Val loss: 0.618436648175
+47
+max_features: 0.2; max_depth: 20; min_samples_split: 10
+CV loss: 0.617600904164
+Val loss: 0.619257954111
+48
+max_features: 0.2; max_depth: 20; min_samples_split: 20
+CV loss: 0.619696228868
+Val loss: 0.621892753116
+49
+max_features: 0.3; max_depth: 10; min_samples_split: 2
+CV loss: 0.642053422853
+Val loss: 0.644270457273
+50
+max_features: 0.3; max_depth: 10; min_samples_split: 5
+CV loss: 0.642267672739
+Val loss: 0.644474100936
+51
+max_features: 0.3; max_depth: 10; min_samples_split: 10
+CV loss: 0.642442517333
+Val loss: 0.644867480728
+52
+max_features: 0.3; max_depth: 10; min_samples_split: 20
+CV loss: 0.643090502976
+Val loss: 0.645128176565
+53
+max_features: 0.3; max_depth: 12; min_samples_split: 2
+CV loss: 0.629060066101
+Val loss: 0.63059058429
+54
+max_features: 0.3; max_depth: 12; min_samples_split: 5
+CV loss: 0.629422171327
+Val loss: 0.631706177982
+55
+max_features: 0.3; max_depth: 12; min_samples_split: 10
+CV loss: 0.629461611013
+Val loss: 0.631551704027
+56
+max_features: 0.3; max_depth: 12; min_samples_split: 20
+CV loss: 0.630486972249
+Val loss: 0.632476129999
+57
+max_features: 0.3; max_depth: 14; min_samples_split: 2
+CV loss: 0.620035818211
+Val loss: 0.621270699046
+58
+max_features: 0.3; max_depth: 14; min_samples_split: 5
+CV loss: 0.620208606569
+Val loss: 0.622240249978
+59
+max_features: 0.3; max_depth: 14; min_samples_split: 10
+CV loss: 0.620766329408
+Val loss: 0.622579559728
+60
+max_features: 0.3; max_depth: 14; min_samples_split: 20
+CV loss: 0.621877496838
+Val loss: 0.623902788479
+61
+max_features: 0.3; max_depth: 16; min_samples_split: 2
+CV loss: 0.615276730368
+Val loss: 0.616430655878
+62
+max_features: 0.3; max_depth: 16; min_samples_split: 5
+CV loss: 0.615071436554
+Val loss: 0.616783622836
+63
+max_features: 0.3; max_depth: 16; min_samples_split: 10
+CV loss: 0.615318231003
+Val loss: 0.616915093779
+64
+max_features: 0.3; max_depth: 16; min_samples_split: 20
+CV loss: 0.616888457313
+Val loss: 0.618006923444
+65
+max_features: 0.3; max_depth: 18; min_samples_split: 2
+CV loss: 0.613487081492
+Val loss: 0.614622061423
+66
+max_features: 0.3; max_depth: 18; min_samples_split: 5
+CV loss: 0.612433204837
+Val loss: 0.614012969857
+67
+max_features: 0.3; max_depth: 18; min_samples_split: 10
+CV loss: 0.612747626875
+Val loss: 0.614484114026
+68
+max_features: 0.3; max_depth: 18; min_samples_split: 20
+CV loss: 0.613964757339
+Val loss: 0.615840971201
+69
+max_features: 0.3; max_depth: 20; min_samples_split: 2
+CV loss: 0.614237891584
+Val loss: 0.61559072786
+70
+max_features: 0.3; max_depth: 20; min_samples_split: 5
+CV loss: 0.612227864207
+Val loss: 0.613487491233
+71
+max_features: 0.3; max_depth: 20; min_samples_split: 10
+CV loss: 0.611297560603
+Val loss: 0.612672312545
+72
+max_features: 0.3; max_depth: 20; min_samples_split: 20
+CV loss: 0.612580010383
+Val loss: 0.614586121393
+73
+max_features: 0.4; max_depth: 10; min_samples_split: 2
+CV loss: 0.634839382264
+Val loss: 0.636739147959
+74
+max_features: 0.4; max_depth: 10; min_samples_split: 5
+CV loss: 0.634845886372
+Val loss: 0.636565352659
+75
+max_features: 0.4; max_depth: 10; min_samples_split: 10
+CV loss: 0.635224944938
+Val loss: 0.636836721582
+76
+max_features: 0.4; max_depth: 10; min_samples_split: 20
+CV loss: 0.635509050114
+Val loss: 0.637385663828
+77
+max_features: 0.4; max_depth: 12; min_samples_split: 2
+CV loss: 0.622985609041
+Val loss: 0.624417580477
+78
+max_features: 0.4; max_depth: 12; min_samples_split: 5
+CV loss: 0.623067304252
+Val loss: 0.624554549881
+79
+max_features: 0.4; max_depth: 12; min_samples_split: 10
+CV loss: 0.62349729869
+Val loss: 0.624522131205
+80
+max_features: 0.4; max_depth: 12; min_samples_split: 20
+CV loss: 0.624205620819
+Val loss: 0.625647283092
+81
+max_features: 0.4; max_depth: 14; min_samples_split: 2
+CV loss: 0.615537455027
+Val loss: 0.617178108998
+82
+max_features: 0.4; max_depth: 14; min_samples_split: 5
+CV loss: 0.615641332651
+Val loss: 0.617120766968
+83
+max_features: 0.4; max_depth: 14; min_samples_split: 10
+CV loss: 0.615880774379
+Val loss: 0.617339129976
+84
+max_features: 0.4; max_depth: 14; min_samples_split: 20
+CV loss: 0.616735041061
+Val loss: 0.618318917504
+85
+max_features: 0.4; max_depth: 16; min_samples_split: 2
+CV loss: 0.612259199212
+Val loss: 0.612961041099
+86
+max_features: 0.4; max_depth: 16; min_samples_split: 5
+CV loss: 0.611605025205
+Val loss: 0.612978232507
+87
+max_features: 0.4; max_depth: 16; min_samples_split: 10
+CV loss: 0.611513625869
+Val loss: 0.613068552429
+88
+max_features: 0.4; max_depth: 16; min_samples_split: 20
+CV loss: 0.612785547935
+Val loss: 0.614216705511
+89
+max_features: 0.4; max_depth: 18; min_samples_split: 2
+CV loss: 0.612463922585
+Val loss: 0.613759182316
+90
+max_features: 0.4; max_depth: 18; min_samples_split: 5
+CV loss: 0.610668415639
+Val loss: 0.612265968751
+91
+max_features: 0.4; max_depth: 18; min_samples_split: 10
+CV loss: 0.610233724129
+Val loss: 0.611726156565
+92
+max_features: 0.4; max_depth: 18; min_samples_split: 20
+CV loss: 0.610607424016
+Val loss: 0.612512925814
+93
+max_features: 0.4; max_depth: 20; min_samples_split: 2
+CV loss: 0.614264302745
+Val loss: 0.61546092161
+94
+max_features: 0.4; max_depth: 20; min_samples_split: 5
+CV loss: 0.611408319874
+Val loss: 0.612427824826
+95
+                    max_features: 0.4; max_depth: 20; min_samples_split: 10
+                    CV loss: 0.609532540195
+                    Val loss: 0.611413030072
+96
+                    max_features: 0.4; max_depth: 20; min_samples_split: 20
+                    CV loss: 0.609852966333
+                    Val loss: 0.6113763362
+97
+max_features: 0.5; max_depth: 10; min_samples_split: 2
+CV loss: 0.630622430407
+Val loss: 0.632137653445
+98
+max_features: 0.5; max_depth: 10; min_samples_split: 5
+CV loss: 0.63075537621
+Val loss: 0.632189733609
+99
+max_features: 0.5; max_depth: 10; min_samples_split: 10
+CV loss: 0.630902610426
+Val loss: 0.632586497837
+100
+max_features: 0.5; max_depth: 10; min_samples_split: 20
+CV loss: 0.631326763419
+Val loss: 0.632940339399
+101
+max_features: 0.5; max_depth: 12; min_samples_split: 2
+CV loss: 0.619875424215
+Val loss: 0.620820963196
+102
+max_features: 0.5; max_depth: 12; min_samples_split: 5
+CV loss: 0.619731417908
+Val loss: 0.621366163435
+103
+max_features: 0.5; max_depth: 12; min_samples_split: 10
+CV loss: 0.620053026592
+Val loss: 0.621495464371
+104
+max_features: 0.5; max_depth: 12; min_samples_split: 20
+CV loss: 0.620671410888
+Val loss: 0.622121822755
+105
+max_features: 0.5; max_depth: 14; min_samples_split: 2
+CV loss: 0.613838605664
+Val loss: 0.615015497153
+106
+max_features: 0.5; max_depth: 14; min_samples_split: 5
+CV loss: 0.613330633713
+Val loss: 0.615121908318
+107
+max_features: 0.5; max_depth: 14; min_samples_split: 10
+CV loss: 0.613361834124
+Val loss: 0.615590048933
+108
+max_features: 0.5; max_depth: 14; min_samples_split: 20
+CV loss: 0.614327327451
+Val loss: 0.616202290059
+109
+max_features: 0.5; max_depth: 16; min_samples_split: 2
+CV loss: 0.611637247377
+Val loss: 0.613238820159
+110
+max_features: 0.5; max_depth: 16; min_samples_split: 5
+CV loss: 0.610704416892
+Val loss: 0.612661097403
+111
+max_features: 0.5; max_depth: 16; min_samples_split: 10
+CV loss: 0.610326331377
+Val loss: 0.611990810454
+112
+max_features: 0.5; max_depth: 16; min_samples_split: 20
+CV loss: 0.611109878489
+Val loss: 0.612751042912
+113
+max_features: 0.5; max_depth: 18; min_samples_split: 2
+CV loss: 0.612835914641
+Val loss: 0.614427973875
+114
+max_features: 0.5; max_depth: 18; min_samples_split: 5
+CV loss: 0.610709289893
+Val loss: 0.612227496761
+115
+            max_features: 0.5; max_depth: 18; min_samples_split: 10
+            CV loss: 0.609536306181
+            Val loss: 0.611630810892
+116
+max_features: 0.5; max_depth: 18; min_samples_split: 20
+CV loss: 0.609537677816
+Val loss: 0.611557872741
+117
+max_features: 0.5; max_depth: 20; min_samples_split: 2
+CV loss: 0.616836187852
+Val loss: 0.616770721339
+118
+max_features: 0.5; max_depth: 20; min_samples_split: 5
+CV loss: 0.612053024171
+Val loss: 0.613658181033
+119
+max_features: 0.5; max_depth: 20; min_samples_split: 10
+CV loss: 0.609948666448
+Val loss: 0.611489121076
+120
+            max_features: 0.5; max_depth: 20; min_samples_split: 20
+            CV loss: 0.609156404808
+            Val loss: 0.611700846373
+            best_loss: 0.609156404808
+best_params: max_features: 0.5; max_depth: 20; min_samples_split: 20

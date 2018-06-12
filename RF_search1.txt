@@ -1,0 +1,482 @@
+1
+max_features: sqrt; max_depth: 10; min_samples_split: 2
+Train loss: 0.66699703155
+Val loss: 0.691835695923
+2
+max_features: sqrt; max_depth: 10; min_samples_split: 5
+Train loss: 0.670033219315
+Val loss: 0.692559413253
+3
+max_features: sqrt; max_depth: 10; min_samples_split: 10
+Train loss: 0.671812959508
+Val loss: 0.692051383065
+4
+max_features: sqrt; max_depth: 10; min_samples_split: 20
+Train loss: 0.674564462572
+Val loss: 0.692825124646
+5
+max_features: sqrt; max_depth: 12; min_samples_split: 2
+Train loss: 0.637991754073
+Val loss: 0.679129091458
+6
+max_features: sqrt; max_depth: 12; min_samples_split: 5
+Train loss: 0.643978774993
+Val loss: 0.678860437072
+7
+max_features: sqrt; max_depth: 12; min_samples_split: 10
+Train loss: 0.649327759065
+Val loss: 0.679641499294
+8
+max_features: sqrt; max_depth: 12; min_samples_split: 20
+Train loss: 0.653103296252
+Val loss: 0.679604344797
+9
+max_features: sqrt; max_depth: 14; min_samples_split: 2
+Train loss: 0.604192746841
+Val loss: 0.66838038044
+10
+max_features: sqrt; max_depth: 14; min_samples_split: 5
+Train loss: 0.615669209587
+Val loss: 0.668981122509
+11
+max_features: sqrt; max_depth: 14; min_samples_split: 10
+Train loss: 0.6252058846
+Val loss: 0.669470219727
+12
+max_features: sqrt; max_depth: 14; min_samples_split: 20
+Train loss: 0.634339065795
+Val loss: 0.671231723863
+13
+max_features: sqrt; max_depth: 16; min_samples_split: 2
+Train loss: 0.56684331095
+Val loss: 0.661050139779
+14
+max_features: sqrt; max_depth: 16; min_samples_split: 5
+Train loss: 0.585711149726
+Val loss: 0.660733629634
+15
+max_features: sqrt; max_depth: 16; min_samples_split: 10
+Train loss: 0.599210036542
+Val loss: 0.660645431554
+16
+max_features: sqrt; max_depth: 16; min_samples_split: 20
+Train loss: 0.613992907884
+Val loss: 0.662704290132
+17
+max_features: sqrt; max_depth: 18; min_samples_split: 2
+Train loss: 0.523806533725
+Val loss: 0.655052454538
+18
+max_features: sqrt; max_depth: 18; min_samples_split: 5
+Train loss: 0.552557879838
+Val loss: 0.653441767685
+19
+max_features: sqrt; max_depth: 18; min_samples_split: 10
+Train loss: 0.574695653599
+Val loss: 0.654177897037
+20
+max_features: sqrt; max_depth: 18; min_samples_split: 20
+Train loss: 0.593932406316
+Val loss: 0.655364130467
+21
+max_features: sqrt; max_depth: 20; min_samples_split: 2
+Train loss: 0.477972704645
+Val loss: 0.651797862382
+22
+max_features: sqrt; max_depth: 20; min_samples_split: 5
+Train loss: 0.519770600169
+Val loss: 0.648936601175
+23
+max_features: sqrt; max_depth: 20; min_samples_split: 10
+Train loss: 0.549835049346
+Val loss: 0.649309435351
+24
+max_features: sqrt; max_depth: 20; min_samples_split: 20
+Train loss: 0.576358761581
+Val loss: 0.651128692846
+25
+max_features: 0.2; max_depth: 10; min_samples_split: 2
+Train loss: 0.63422484871
+Val loss: 0.666646409702
+26
+max_features: 0.2; max_depth: 10; min_samples_split: 5
+Train loss: 0.636785710611
+Val loss: 0.666447940657
+27
+max_features: 0.2; max_depth: 10; min_samples_split: 10
+Train loss: 0.639652445752
+Val loss: 0.666887175614
+28
+max_features: 0.2; max_depth: 10; min_samples_split: 20
+Train loss: 0.642789572797
+Val loss: 0.667249008158
+29
+max_features: 0.2; max_depth: 12; min_samples_split: 2
+Train loss: 0.598449746675
+Val loss: 0.655417273472
+30
+max_features: 0.2; max_depth: 12; min_samples_split: 5
+Train loss: 0.606060346328
+Val loss: 0.655565216139
+31
+max_features: 0.2; max_depth: 12; min_samples_split: 10
+Train loss: 0.610948697473
+Val loss: 0.655542811078
+32
+max_features: 0.2; max_depth: 12; min_samples_split: 20
+Train loss: 0.617960298621
+Val loss: 0.655737868775
+33
+max_features: 0.2; max_depth: 14; min_samples_split: 2
+Train loss: 0.556888187662
+Val loss: 0.647541144823
+34
+max_features: 0.2; max_depth: 14; min_samples_split: 5
+Train loss: 0.570697016493
+Val loss: 0.647522929093
+35
+max_features: 0.2; max_depth: 14; min_samples_split: 10
+Train loss: 0.58250927661
+Val loss: 0.647755829103
+36
+max_features: 0.2; max_depth: 14; min_samples_split: 20
+Train loss: 0.593545210711
+Val loss: 0.648439084733
+37
+max_features: 0.2; max_depth: 16; min_samples_split: 2
+Train loss: 0.510756309772
+Val loss: 0.643548406928
+38
+max_features: 0.2; max_depth: 16; min_samples_split: 5
+Train loss: 0.533387953158
+Val loss: 0.642277734735
+39
+max_features: 0.2; max_depth: 16; min_samples_split: 10
+Train loss: 0.552646690845
+Val loss: 0.642454674383
+40
+max_features: 0.2; max_depth: 16; min_samples_split: 20
+Train loss: 0.570396500226
+Val loss: 0.64317856895
+41
+max_features: 0.2; max_depth: 18; min_samples_split: 2
+Train loss: 0.459533211436
+Val loss: 0.64296471724
+42
+max_features: 0.2; max_depth: 18; min_samples_split: 5
+Train loss: 0.495216589654
+Val loss: 0.640171848785
+43
+max_features: 0.2; max_depth: 18; min_samples_split: 10
+Train loss: 0.523114793747
+Val loss: 0.639911634934
+44
+max_features: 0.2; max_depth: 18; min_samples_split: 20
+Train loss: 0.548826476914
+Val loss: 0.640132902523
+45
+max_features: 0.2; max_depth: 20; min_samples_split: 2
+Train loss: 0.412234821786
+Val loss: 0.646363899751
+46
+max_features: 0.2; max_depth: 20; min_samples_split: 5
+Train loss: 0.45885754107
+Val loss: 0.640119065705
+47
+max_features: 0.2; max_depth: 20; min_samples_split: 10
+Train loss: 0.497456391491
+Val loss: 0.638343398087
+48
+max_features: 0.2; max_depth: 20; min_samples_split: 20
+Train loss: 0.531255905872
+Val loss: 0.638571567486
+49
+max_features: 0.3; max_depth: 10; min_samples_split: 2
+Train loss: 0.614998063681
+Val loss: 0.654584996823
+50
+max_features: 0.3; max_depth: 10; min_samples_split: 5
+Train loss: 0.617633147287
+Val loss: 0.654516492661
+51
+max_features: 0.3; max_depth: 10; min_samples_split: 10
+Train loss: 0.620654736311
+Val loss: 0.654562320402
+52
+max_features: 0.3; max_depth: 10; min_samples_split: 20
+Train loss: 0.625128663939
+Val loss: 0.655236324103
+53
+max_features: 0.3; max_depth: 12; min_samples_split: 2
+Train loss: 0.575102551292
+Val loss: 0.646012729168
+54
+max_features: 0.3; max_depth: 12; min_samples_split: 5
+Train loss: 0.5827072157
+Val loss: 0.646195361598
+55
+max_features: 0.3; max_depth: 12; min_samples_split: 10
+Train loss: 0.589389765634
+Val loss: 0.646234265738
+56
+max_features: 0.3; max_depth: 12; min_samples_split: 20
+Train loss: 0.598368496868
+Val loss: 0.646780463025
+57
+max_features: 0.3; max_depth: 14; min_samples_split: 2
+Train loss: 0.528438100182
+Val loss: 0.641860272128
+58
+max_features: 0.3; max_depth: 14; min_samples_split: 5
+Train loss: 0.542074736625
+Val loss: 0.641664914279
+59
+max_features: 0.3; max_depth: 14; min_samples_split: 10
+Train loss: 0.555433549914
+Val loss: 0.641228461104
+60
+max_features: 0.3; max_depth: 14; min_samples_split: 20
+Train loss: 0.571178501005
+Val loss: 0.641529283557
+61
+max_features: 0.3; max_depth: 16; min_samples_split: 2
+Train loss: 0.475539529321
+Val loss: 0.641443929229
+62
+max_features: 0.3; max_depth: 16; min_samples_split: 5
+Train loss: 0.50003464855
+Val loss: 0.639534598477
+63
+max_features: 0.3; max_depth: 16; min_samples_split: 10
+Train loss: 0.522293307694
+Val loss: 0.638837298196
+64
+max_features: 0.3; max_depth: 16; min_samples_split: 20
+Train loss: 0.545034991908
+Val loss: 0.63891227701
+65
+max_features: 0.3; max_depth: 18; min_samples_split: 2
+Train loss: 0.42233759221
+Val loss: 0.645349495989
+66
+max_features: 0.3; max_depth: 18; min_samples_split: 5
+Train loss: 0.459081372547
+Val loss: 0.640742538484
+67
+max_features: 0.3; max_depth: 18; min_samples_split: 10
+Train loss: 0.490537733842
+Val loss: 0.638633558676
+68
+max_features: 0.3; max_depth: 18; min_samples_split: 20
+Train loss: 0.522807239139
+Val loss: 0.638016960424
+69
+max_features: 0.3; max_depth: 20; min_samples_split: 2
+Train loss: 0.373697319041
+Val loss: 0.653354158382
+70
+max_features: 0.3; max_depth: 20; min_samples_split: 5
+Train loss: 0.42228057108
+Val loss: 0.644861070919
+71
+max_features: 0.3; max_depth: 20; min_samples_split: 10
+Train loss: 0.465293403344
+Val loss: 0.639590949304
+72
+max_features: 0.3; max_depth: 20; min_samples_split: 20
+Train loss: 0.505812561321
+Val loss: 0.63822183469
+73
+max_features: 0.4; max_depth: 10; min_samples_split: 2
+Train loss: 0.604243145282
+Val loss: 0.650017698966
+74
+max_features: 0.4; max_depth: 10; min_samples_split: 5
+Train loss: 0.606709134641
+Val loss: 0.649606776212
+75
+max_features: 0.4; max_depth: 10; min_samples_split: 10
+Train loss: 0.610609346092
+Val loss: 0.649942239255
+76
+max_features: 0.4; max_depth: 10; min_samples_split: 20
+Train loss: 0.61550896274
+Val loss: 0.650143687815
+77
+max_features: 0.4; max_depth: 12; min_samples_split: 2
+Train loss: 0.561231175894
+Val loss: 0.643832327585
+78
+max_features: 0.4; max_depth: 12; min_samples_split: 5
+Train loss: 0.568185990991
+Val loss: 0.643319471428
+79
+max_features: 0.4; max_depth: 12; min_samples_split: 10
+Train loss: 0.577039412462
+Val loss: 0.643269995403
+80
+max_features: 0.4; max_depth: 12; min_samples_split: 20
+Train loss: 0.586732585696
+Val loss: 0.643519325607
+81
+max_features: 0.4; max_depth: 14; min_samples_split: 2
+Train loss: 0.510015508877
+Val loss: 0.641401989455
+82
+max_features: 0.4; max_depth: 14; min_samples_split: 5
+Train loss: 0.525040861204
+Val loss: 0.64029495318
+83
+max_features: 0.4; max_depth: 14; min_samples_split: 10
+Train loss: 0.540809720349
+Val loss: 0.640321124312
+84
+max_features: 0.4; max_depth: 14; min_samples_split: 20
+Train loss: 0.557953243526
+Val loss: 0.639917090807
+85
+max_features: 0.4; max_depth: 16; min_samples_split: 2
+Train loss: 0.455208161776
+Val loss: 0.643617445619
+86
+max_features: 0.4; max_depth: 16; min_samples_split: 5
+Train loss: 0.479981768757
+Val loss: 0.640837713724
+87
+max_features: 0.4; max_depth: 16; min_samples_split: 10
+Train loss: 0.505449112709
+Val loss: 0.639306088034
+88
+max_features: 0.4; max_depth: 16; min_samples_split: 20
+Train loss: 0.531370416131
+Val loss: 0.638842279025
+89
+max_features: 0.4; max_depth: 18; min_samples_split: 2
+Train loss: 0.40020182006
+Val loss: 0.649986115514
+90
+max_features: 0.4; max_depth: 18; min_samples_split: 5
+Train loss: 0.437516877334
+Val loss: 0.644980021773
+91
+max_features: 0.4; max_depth: 18; min_samples_split: 10
+Train loss: 0.472888094778
+Val loss: 0.641004920241
+92
+max_features: 0.4; max_depth: 18; min_samples_split: 20
+Train loss: 0.509846559061
+Val loss: 0.639160652252
+93
+max_features: 0.4; max_depth: 20; min_samples_split: 2
+Train loss: 0.351552420313
+Val loss: 0.66147911365
+94
+max_features: 0.4; max_depth: 20; min_samples_split: 5
+Train loss: 0.401634175158
+Val loss: 0.651133211217
+95
+max_features: 0.4; max_depth: 20; min_samples_split: 10
+Train loss: 0.44811275527
+Val loss: 0.643408490109
+96
+max_features: 0.4; max_depth: 20; min_samples_split: 20
+Train loss: 0.493154151089
+Val loss: 0.6400785461
+97
+max_features: 0.5; max_depth: 10; min_samples_split: 2
+Train loss: 0.597243024269
+Val loss: 0.648287582523
+98
+max_features: 0.5; max_depth: 10; min_samples_split: 5
+Train loss: 0.600235044831
+Val loss: 0.648093361833
+99
+max_features: 0.5; max_depth: 10; min_samples_split: 10
+Train loss: 0.604017032646
+Val loss: 0.648036281188
+100
+max_features: 0.5; max_depth: 10; min_samples_split: 20
+Train loss: 0.608875157639
+Val loss: 0.648375302944
+101
+max_features: 0.5; max_depth: 12; min_samples_split: 2
+Train loss: 0.55084828761
+Val loss: 0.643742355794
+102
+max_features: 0.5; max_depth: 12; min_samples_split: 5
+Train loss: 0.558716631784
+Val loss: 0.643057024422
+103
+max_features: 0.5; max_depth: 12; min_samples_split: 10
+Train loss: 0.568395534065
+Val loss: 0.642953165975
+104
+max_features: 0.5; max_depth: 12; min_samples_split: 20
+Train loss: 0.579062454674
+Val loss: 0.643011702938
+105
+max_features: 0.5; max_depth: 14; min_samples_split: 2
+Train loss: 0.497051260729
+Val loss: 0.643172666801
+106
+max_features: 0.5; max_depth: 14; min_samples_split: 5
+Train loss: 0.512307025557
+Val loss: 0.642204871758
+107
+max_features: 0.5; max_depth: 14; min_samples_split: 10
+Train loss: 0.53031653267
+Val loss: 0.641335976228
+108
+max_features: 0.5; max_depth: 14; min_samples_split: 20
+Train loss: 0.548914440322
+Val loss: 0.641093605902
+109
+max_features: 0.5; max_depth: 16; min_samples_split: 2
+Train loss: 0.439377732735
+Val loss: 0.646826453664
+110
+max_features: 0.5; max_depth: 16; min_samples_split: 5
+Train loss: 0.466050616332
+Val loss: 0.644108171051
+111
+max_features: 0.5; max_depth: 16; min_samples_split: 10
+Train loss: 0.492588270939
+Val loss: 0.641796446621
+112
+max_features: 0.5; max_depth: 16; min_samples_split: 20
+Train loss: 0.521478082861
+Val loss: 0.640431563954
+113
+max_features: 0.5; max_depth: 18; min_samples_split: 2
+Train loss: 0.383647872868
+Val loss: 0.656574762542
+114
+max_features: 0.5; max_depth: 18; min_samples_split: 5
+Train loss: 0.422194830683
+Val loss: 0.64930333433
+115
+max_features: 0.5; max_depth: 18; min_samples_split: 10
+Train loss: 0.460259999106
+Val loss: 0.644353944653
+116
+max_features: 0.5; max_depth: 18; min_samples_split: 20
+Train loss: 0.500072655959
+Val loss: 0.641251982305
+117
+max_features: 0.5; max_depth: 20; min_samples_split: 2
+Train loss: 0.336820238425
+Val loss: 0.669669791262
+118
+max_features: 0.5; max_depth: 20; min_samples_split: 5
+Train loss: 0.386819899961
+Val loss: 0.656588990608
+119
+max_features: 0.5; max_depth: 20; min_samples_split: 10
+Train loss: 0.435852127782
+Val loss: 0.648177243303
+120
+max_features: 0.5; max_depth: 20; min_samples_split: 20
+Train loss: 0.484205480801
+Val loss: 0.642741573037
+best_loss: 0.638016960424
+best_params: max_features: 0.3; max_depth: 18; min_samples_split: 20
